@@ -1,9 +1,8 @@
 package com.fr.yoni.registrant.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.persistence.*;
 
 @Entity
 public class Registrant {
@@ -12,25 +11,37 @@ public class Registrant {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String lastname;
 
+    @Column(nullable = false)
     private String firstname;
 
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private Integer age;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean student;
+
+    @Column(nullable = false)
     private String country;
 
 
     public Registrant(){}
 
-
-    public Registrant(Long id, String lastname, String firstname, Integer age, String country) {
+    public Registrant(Long id, String lastname, String firstname, String email, Integer age, boolean student, String country) {
         this.id = id;
         this.lastname = lastname;
         this.firstname = firstname;
+        this.email = email;
         this.age = age;
+        this.student = student;
         this.country = country;
     }
+
 
     public Long getId() {
         return id;
@@ -70,6 +81,22 @@ public class Registrant {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isStudent() {
+        return student;
+    }
+
+    public void setStudent(boolean student) {
+        this.student = student;
     }
 
     @Override
