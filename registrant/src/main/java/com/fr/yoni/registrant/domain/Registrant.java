@@ -1,15 +1,15 @@
 package com.fr.yoni.registrant.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Registrant {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String lastname;
@@ -18,7 +18,6 @@ public class Registrant {
 
     private Integer age;
 
-    @Column(nullable = false)
     private String country;
 
 
