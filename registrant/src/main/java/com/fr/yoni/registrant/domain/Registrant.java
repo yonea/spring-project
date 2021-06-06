@@ -1,9 +1,11 @@
 package com.fr.yoni.registrant.domain;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.persistence.*;
 
+/**
+ * Entity representing a user(=registrant)
+ * @author Yoni Baroukh
+ */
 @Entity
 public class Registrant {
 

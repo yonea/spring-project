@@ -4,6 +4,10 @@ import com.fr.yoni.registrant.domain.Registrant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ *
+ * @author Yoni Baroukh
+ */
 @Repository
 public interface RegistrantRepository extends JpaRepository<Registrant, Long> {
 }

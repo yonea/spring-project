@@ -5,6 +5,10 @@ import com.fr.yoni.registrant.domain.Registrant;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *
+ * @author Yoni Baroukh
+ */
 public interface RegistrantService {
 
     /**
