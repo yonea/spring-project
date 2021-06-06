@@ -1,44 +1,34 @@
 package com.fr.yoni.registrant.controllers;
 
 import com.fr.yoni.registrant.domain.Registrant;
-import com.fr.yoni.registrant.repositories.RegistrantRepository;
+import com.fr.yoni.registrant.service.RegistrantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class RegistrantController {
 
     @Autowired
-    RegistrantRepository registrantRepository;
+    RegistrantService registrantService;
 
     @GetMapping(value = "/registrants")
-    public List<Registrant> list() {
-        return registrantRepository.findAll();
+    public ResponseEntity<Object> list() {
+        return new ResponseEntity<>(registrantService.getAllRegistrant(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/registrants/{id}")
-    public Optional<Registrant> get(@PathVariable Long id) {
-        Optional<Registrant> registrantInstance = registrantRepository.findById(id);
-
-        if (!registrantInstance.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Specified registrant doesn't exist");
-
-        return registrantInstance;
+    public ResponseEntity<Object> get(@PathVariable Long id) {
+        return new ResponseEntity<>(registrantService.getOneRegistrant(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "/registrants")
-    Registrant createNewRegistrant(@RequestBody Registrant registrant){
+    ResponseEntity<Object> createNewRegistrant(@RequestBody Registrant registrant) {
         String country = registrant.getCountry().toUpperCase();
         registrant.setCountry(country);
-        if(registrant.getAge()>17 && registrant.getCountry().equals("FRANCE")){
-            return registrantRepository.save(registrant);
-        }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't create registrat under 18 years old");
+        registrantService.createRegistrant(registrant);
+        return new ResponseEntity<>("Registrant is created successfully", HttpStatus.CREATED);
     }
 
 }
