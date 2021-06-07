@@ -8,7 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *
+ * RegistrantController class with 3 services :
+ * - register a user POST /registrants
+ * - displays the details of a registered user GET /registrants/{id}
+ * - displays the details of all registered users GET /registrants
+ * @see RegistrantService
  * @author Yoni Baroukh
  */
 @RestController

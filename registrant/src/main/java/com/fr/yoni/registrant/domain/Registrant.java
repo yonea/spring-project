@@ -3,7 +3,7 @@ package com.fr.yoni.registrant.domain;
 import javax.persistence.*;
 
 /**
- * Entity representing a user(=registrant)
+ * Registrant class to define a user(=registrant)
  * @author Yoni Baroukh
  */
 @Entity

@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
+ * RegistrantService class to create and display registered users
  * @author Yoni Baroukh
+ * @see RegistrantServiceImpl
  */
 public interface RegistrantService {
 

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * RegistrantRepository interface using JpaRepository to manage data
  * @author Yoni Baroukh
  */
 @Repository

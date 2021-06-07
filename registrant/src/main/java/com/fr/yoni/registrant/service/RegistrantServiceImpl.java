@@ -2,7 +2,6 @@ package com.fr.yoni.registrant.service;
 
 import com.fr.yoni.registrant.domain.Registrant;
 import com.fr.yoni.registrant.repositories.RegistrantRepository;
-import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *
+ * RegistrantServiceImpl class to implement RegistrantService methods
+ * @see RegistrantService
  * @author Yoni Baroukh
  */
 @Service
@@ -28,7 +28,7 @@ public class RegistrantServiceImpl implements RegistrantService {
                     "At least one mandatory fields (lastname, firstname, email, age, country) not filled in");
         }
 
-        if (checkAgeRegistrant(registrant) && checkCountryRegistrant(registrant)) {
+        if (validateAgeRegistrant(registrant) && validateCountryRegistrant(registrant)) {
             registrantRepository.save(registrant);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -53,17 +53,28 @@ public class RegistrantServiceImpl implements RegistrantService {
     }
 
     /**
-     * Check if registred user is adult (>18 years) and that live in France
-     * @param registrant
+     * Check if registred user is adult (>18 years)
+     * @param registrant user wanting to register
      * @return boolean
      */
-    private boolean checkAgeRegistrant(Registrant registrant) {
+    private boolean validateAgeRegistrant(Registrant registrant) {
         return registrant.getAge() > 17;
     }
-    private boolean checkCountryRegistrant(Registrant registrant) {
+
+    /**
+     * Check if registred user lives in France
+     * @param registrant user wanting to register
+     * @return
+     */
+    private boolean validateCountryRegistrant(Registrant registrant) {
         return registrant.getCountry().equals("FRANCE");
     }
 
+    /**
+     * Check if one or more mandatory fields is null
+     * @param registrant user wanting to register
+     * @return boolean
+     */
     private boolean mandatoryFieldsAreNull(Registrant registrant){
         return registrant.getFirstname() == null ||
                 registrant.getLastname() == null ||
