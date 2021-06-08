@@ -2,6 +2,7 @@ package com.fr.yoni.registrant.aspect;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -11,6 +12,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -38,6 +40,7 @@ public class LoggingAspect
         //Get intercepted method details
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
+        Object[] methodInput = proceedingJoinPoint.getArgs();
 
         final StopWatch stopWatch = new StopWatch();
 
@@ -48,6 +51,8 @@ public class LoggingAspect
 
         //Log method with execution time
         LOGGER.info("Method " + className + "." + methodName + "execution started at " + new Date());
+        LOGGER.info("Input : " + Arrays.toString(methodInput));
+        LOGGER.info("Output : " + result);
         LOGGER.info("Execution time of method " + className + "." + methodName + " : " +  stopWatch.getTotalTimeMillis() + " ms");
         LOGGER.info("Method " + className + "." + methodName + "execution ended at " + new Date());
 
@@ -55,7 +60,16 @@ public class LoggingAspect
     }
 
     @AfterThrowing(pointcut = "execution(* com.fr.yoni.registrant.service..*(..)))", throwing = "exception")
-    public void logAfterThrowingAllMethods(Exception exception) {
+    public void logAfterThrowingAllMethods(JoinPoint joinPoint, Exception exception) {
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+
+        //Get intercepted method details
+        String className = methodSignature.getDeclaringType().getSimpleName();
+        String methodName = methodSignature.getName();
+        Object[] methodInput = joinPoint.getArgs();
+
+        LOGGER.info("Method " + className + "." + methodName + "execution started at " + new Date());
+        LOGGER.info("Input : " + Arrays.toString(methodInput));
         LOGGER.error(exception.getMessage());
     }
 }
