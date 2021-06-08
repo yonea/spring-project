@@ -17,7 +17,6 @@ import java.util.Date;
 
 /**
  * LoggingAspect class using AOP to track executed methods and calculate processing time
- * Inspired by thanks to https://howtodoinjava.com/spring-boot2/logging/performance-logging-aspectj-aop//**
  * @author Yoni Baroukh
  */
 @Aspect
@@ -37,19 +36,19 @@ public class LoggingAspect
     {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 
-        //Get intercepted method details
+        /* Get intercepted method details */
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
         Object[] methodInput = proceedingJoinPoint.getArgs();
 
         final StopWatch stopWatch = new StopWatch();
 
-        //Measure method execution time
+        /* Measure method execution time */
         stopWatch.start();
         Object result = proceedingJoinPoint.proceed();
         stopWatch.stop();
 
-        //Log method with execution time
+        /* Log method with input, output and execution time */
         LOGGER.info("Method " + className + "." + methodName + "execution started at " + new Date());
         LOGGER.info("Input : " + Arrays.toString(methodInput));
         LOGGER.info("Output : " + result);
@@ -63,11 +62,12 @@ public class LoggingAspect
     public void logAfterThrowingAllMethods(JoinPoint joinPoint, Exception exception) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
-        //Get intercepted method details
+        /* Get intercepted method details */
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
         Object[] methodInput = joinPoint.getArgs();
 
+        /* Log method with input and exception message */
         LOGGER.info("Method " + className + "." + methodName + "execution started at " + new Date());
         LOGGER.info("Input : " + Arrays.toString(methodInput));
         LOGGER.error(exception.getMessage());
