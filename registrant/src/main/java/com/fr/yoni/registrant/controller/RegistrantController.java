@@ -1,10 +1,11 @@
-package com.fr.yoni.registrant.controllers;
+package com.fr.yoni.registrant.controller;
 
 import com.fr.yoni.registrant.domain.Registrant;
 import com.fr.yoni.registrant.service.RegistrantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @see RegistrantService
  * @author Yoni Baroukh
  */
+@Validated
 @RestController
 public class RegistrantController {
 

@@ -50,7 +50,10 @@ public class RegistrantControllerTest extends GetResultRequestTest {
         /* country != France */
         Registrant registrant3 = new Registrant(null, "Yves", "Plein", "yves@hotmail.fr", 23, false, "Canada");
 
-        registrantArrayList = new ArrayList<>(Arrays.asList(registrant1, registrant2, registrant3));
+        /* empty field */
+        Registrant registrant4 = new Registrant(null, "", "Delage", "delage@hotmail.fr", 23, false, "France");
+
+        registrantArrayList = new ArrayList<>(Arrays.asList(registrant1, registrant2, registrant3, registrant4));
     }
 
     @Test

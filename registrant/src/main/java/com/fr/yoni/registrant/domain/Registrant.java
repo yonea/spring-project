@@ -1,6 +1,9 @@
 package com.fr.yoni.registrant.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * Registrant class to define a user(=registrant)
@@ -10,25 +13,26 @@ import javax.persistence.*;
 public class Registrant {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "Lastname is mandatory")
     private String lastname;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "Firstname is mandatory")
     private String firstname;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "Email is mandatory")
     private String email;
 
-    @Column(nullable = false)
+    @NotNull(message = "Age is mandatory")
+    @Min(value = 18, message = "Only adult ( age > 18 years ) can create account")
     private Integer age;
 
     @Column(columnDefinition = "boolean default false")
     private boolean student;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "Country is mandatory")
     private String country;
 
 

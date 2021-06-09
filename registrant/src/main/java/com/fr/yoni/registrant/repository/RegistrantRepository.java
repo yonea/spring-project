@@ -1,4 +1,4 @@
-package com.fr.yoni.registrant.repositories;
+package com.fr.yoni.registrant.repository;
 
 import com.fr.yoni.registrant.domain.Registrant;
 import org.springframework.data.jpa.repository.JpaRepository;

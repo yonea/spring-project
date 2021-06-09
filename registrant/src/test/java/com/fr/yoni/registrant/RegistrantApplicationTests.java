@@ -1,6 +1,6 @@
 package com.fr.yoni.registrant;
 
-import com.fr.yoni.registrant.controllers.RegistrantController;
+import com.fr.yoni.registrant.controller.RegistrantController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
